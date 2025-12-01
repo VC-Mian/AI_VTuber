@@ -70,10 +70,13 @@ Set up environment variables
 Create a .env, copy & paste this into the file
 ```bash
    ANTHROPIC_API_KEY=your_claude_api_key
+   # OR
    OPENAI_API_KEY=your_openai_api_key
 
+   # AI Provider
    AI_PROVIDER=Put_openai_or_claude
 
+   # Twitch Configuration
    TWITCH_TOKEN=your_oauth_token
    TWITCH_CLIENT_ID=your_client_id
    TWITCH_CLIENT_SECRET=your_client_secret
@@ -94,10 +97,17 @@ Create a .env, copy & paste this into the file
 
 Twitch credentials
 
-If you do not have a twitich account create one first. 
+If you do not have a twitich account create two accounts.
+1st Account will be the bots account
+2nd will be to braodcast from
 
 OAuth Token: https://twitchtokengenerator.com/
+- Select: bot chat token
 Client ID/Secret: https://dev.twitch.tv/console/apps
+ - Click Register new Application
+ -	OAuth Redirect URLs: http://localhost:3000
+ -	Category: Chat bot
+ -	Generate a new secret
 Bot ID: https://www.streamweasels.com/tools/convert-twitch-username-to-user-id/
 
 (OPTIONAL) Set up VTube Studio
