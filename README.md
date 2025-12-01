@@ -63,28 +63,44 @@ source venv/bin/activate
 Install dependencies
 ```bash
    pip install -r requirements.txt
+```
 
 Set up environment variables
-Copy .env.example to .env:
 
-bash   cp .env.example .env
-Fill in your credentials:
-env   TWITCH_TOKEN=your_oauth_token
+Create a .env, copy & paste this into the file
+```bash
+   ANTHROPIC_API_KEY=your_claude_api_key
+   OPENAI_API_KEY=your_openai_api_key
+
+   AI_PROVIDER=Put_openai_or_claude
+
+   TWITCH_TOKEN=your_oauth_token
    TWITCH_CLIENT_ID=your_client_id
    TWITCH_CLIENT_SECRET=your_client_secret
    TWITCH_BOT_ID=your_bot_id
    TWITCH_CHANNEL=your_channel_name
-   
-   ANTHROPIC_API_KEY=your_claude_api_key
 
-Get Twitch credentials
+   # TTS Configuration
+   TTS_ENABLED=true
+   TTS_RATE=150
+   TTS_VOLUME=0.9
+   
+   # Bot Configuration
+   RESPONSE_COOLDOWN=3
+   MAX_MESSAGE_LENGTH=500
+```
+
+**Obtain credentials**
+
+Twitch credentials
+
+If you do not have a twitich account create one first. 
 
 OAuth Token: https://twitchtokengenerator.com/
 Client ID/Secret: https://dev.twitch.tv/console/apps
 Bot ID: https://www.streamweasels.com/tools/convert-twitch-username-to-user-id/
-```
 
-Set up VTube Studio
+(OPTIONAL) Set up VTube Studio
 
 Open VTube Studio
 Go to Settings → General Settings
@@ -92,10 +108,11 @@ Enable "Start API"
 Note the port (default: 8001)
 
 
-Running the Project
+**Running the Project**
 
-Start VTube Studio (must be running first)
-Run the bot
+(OPTIONAL) Start VTube Studio (must be running first) 
+
+ Run the bot
 
 ```bash
 python main.py
