@@ -4,7 +4,7 @@ Project MEI is an AI-powered VTuber that interacts with Twitch viewers in real-t
 Inspired by Vedal who programed the AI Vtuber on Twutch, Neruo-sama, this project demonstrates the integration of large language models, real-time chat processing, 
 and character animation to create an engaging streaming experience. 
 
-##Features
+## Features
 1. Real-time AI responses using Claude API
 2. Custom personality
 3. Twitch chat integration with message queue system
@@ -12,7 +12,7 @@ and character animation to create an engaging streaming experience.
 5. Text-to-speech voice synthesis
 6. Auto-reconnection handling for stable streaming
 
-##Tech Stack
+## Tech Stack
 **Core Technologies**
 -Language: Python 3.x
 -AI/ML: Claude API (Anthropic Sonnet 4)
@@ -31,7 +31,7 @@ and character animation to create an engaging streaming experience.
 -OBS Studio - Stream broadcasting (Optional)
 -Git - Version control
 
-##Running it
+## Running it
 **Prerequisites**
 What you need installed:
 
