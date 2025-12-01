@@ -14,34 +14,33 @@ and character animation to create an engaging streaming experience.
 
 ## Tech Stack
 **Core Technologies**
--Language: Python 3.x
--AI/ML: Claude API (Anthropic Sonnet 4)
--Framework: asyncio for asynchronous processing
+- Language: Python 3.x
+- AI/ML: Claude API (Anthropic Sonnet 4)
+- Framework: asyncio for asynchronous processing
 
 **APIs & Libraries**
 
--TwitchIO 2.9.1 - Twitch chat integration
--pyvts - VTube Studio WebSocket API
--pyttsx3 - Text-to-speech engine
--python-dotenv - Environment configuration
+- TwitchIO 2.9.1 - Twitch chat integration
+- pyvts - VTube Studio WebSocket API
+- pyttsx3 - Text-to-speech engine
+- python-dotenv - Environment configuration
 
 **Tools & Platforms**
 
--VTube Studio - Live2D character rendering
--OBS Studio - Stream broadcasting (Optional)
--Git - Version control
+- VTube Studio
+- Live2D character rendering
+- OBS Studio - Stream broadcasting (Optional)
+- Git
+- Version control
 
 ## Running it
 **Prerequisites**
-What you need installed:
 
--Python 3.8 or higher
--VTube Studio
--OBS Studio (optional, for streaming)
--Twitch account
--Claude API key (or OpenAI API key)
-
-Installation
+- Python 3.8 or higher
+- VTube Studio
+- OBS Studio (optional, for streaming)
+- Twitch account
+- Claude API key (or OpenAI API key)
 
 Clone the repository
 
@@ -49,19 +48,21 @@ Clone the repository
    git clone https://github.com/yourusername/project-muei.git
    cd project-muei
 ```
+
 Create virtual environment
 
-bash   python -m venv venv
+```bash
+python -m venv venv
+# Windows
+venv\Scripts\activate
    
-   # Windows
-   venv\Scripts\activate
-   
-   # Mac/Linux
-   source venv/bin/activate
+# Mac/Linux
+source venv/bin/activate
+```
 
 Install dependencies
-
-bash   pip install -r requirements.txt
+```bash
+   pip install -r requirements.txt
 
 Set up environment variables
 Copy .env.example to .env:
@@ -81,7 +82,7 @@ Get Twitch credentials
 OAuth Token: https://twitchtokengenerator.com/
 Client ID/Secret: https://dev.twitch.tv/console/apps
 Bot ID: https://www.streamweasels.com/tools/convert-twitch-username-to-user-id/
-
+```
 
 Set up VTube Studio
 
@@ -96,10 +97,10 @@ Running the Project
 Start VTube Studio (must be running first)
 Run the bot
 
-bash   python main.py
+```bash
+python main.py
+```
 
 Test in Twitch chat
 
-Go to your Twitch channel
-Type: hey muei, how are you?
-The bot should respond!
+Go to the Twitch channel "muiebo" and type "Hi mei" 
