@@ -111,6 +111,7 @@ Client ID/Secret: https://dev.twitch.tv/console/apps
    - Generate a new secret
     
 Bot ID: https://www.streamweasels.com/tools/convert-twitch-username-to-user-id/
+   - Enter the Bot's name to convert, copy the ID generated. 
 
 (OPTIONAL) Set up VTube Studio
 
