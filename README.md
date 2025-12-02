@@ -1,7 +1,9 @@
 # Project_MEI
 
-This is MEIBO an AI VTuber that interacts with Twitch viewers in real-time. 
-Inspired by Vedal who programed the AI Vtuber on Twutch, Neruo-sama, this project demonstrates the integration of large language models, real-time chat processing, 
+> **📍 STATUS:** (WIP) Basic Features added, streamable. 
+
+This is Meibo an AI VTuber that interacts with Twitch viewers in real-time. 
+Inspired by Vedal who programed the AI Vtuber on Twitch, Neuro-sama, this project demonstrates the integration of large language models, real-time chat processing, 
 and character animation to create an engaging streaming experience. 
 
 ## Personality
@@ -10,7 +12,7 @@ and character animation to create an engaging streaming experience.
    - Personality: Witty, sarcastic, playful, cool and composed
    - Expertise: Medical knowledge with a dark sense of humor
 
-   - Trigger words to chat with Muei:
+   - Trigger words to chat with Meibo:
       - meibo
       - mei    
       - ei
@@ -46,35 +48,43 @@ and character animation to create an engaging streaming experience.
 - Git
 - Version control
 
-## Running it
-**Prerequisites**
-
-- Python 3.8 or higher
-- VTube Studio
-- OBS Studio (optional, for streaming)
-- Twitch account
-- Claude API key (or OpenAI API key)
-
-
 ## How it works
 
    Pipeline: 
    
     ```bash
     
-     Twitch Chat → Message Queue → Claude/OpenAI API → AI Response
-                                                         ↓
-                                     ┌──────────────────┼──────────────────┐
-                                     ↓                  ↓                  ↓
-                               Twitch Chat          TTS Engine      VTube Studio
-                              (text reply)        (voice output)    (lip-sync)
-     
+      Twitch Chat → Message Queue → Claude/OpenAI API → AI Response
+                                                     ↓
+                                  ┌──────────────────┼──────────────────┐
+                                  ↓                  ↓                  ↓
+                            Twitch Chat          TTS Engine      VTube Studio
+                            (text reply)       (voice output)     (lip-sync)
      ```
    1. Message Reception: Bot monitors your Twitch chat for trigger words
    2. Queueing: Messages processed one at a time to prevent overlap
    3. AI Processing: LLM generates personality-driven response
    4. Multi-Output: Response sent to chat, converted to speech, and animates character
    5. Synchronization: Waits for completion before processing next message
+
+## Setup & Installation
+Full setup instructions available in the Template Repository
+
+Template Repo: https://github.com/VC-Mian/AI_VTuber
+
+Quick Overview:
+
+Clone the template repository
+
+Set up Twitch credentials (bot account + streaming channel)
+
+Obtain Claude or OpenAI API key
+
+Configure personality in src/config.py
+
+Run with python main.py
+
+Prerequisites: Python 3.8+, VTube Studio, Twitch account, Claude/OpenAI API key
 
 ## What I have learnt
    - Integrating multiple real-time APIs (Twitch, LLMs, VTube Studio)
@@ -92,10 +102,22 @@ and character animation to create an engaging streaming experience.
    - Rig Custom Vtuber Model
    - Minecraft game play
 
+## Challenges & Solutions
+
+**Threading Conflicts in TTS**
+- Problem: pyttsx3 "run loop already started" errors
+- Solution: Create new engine instance per speech operation with proper cleanup
+
+**VTube Studio Connection Drops**  
+- Problem: WebSocket protocol errors breaking lip-sync mid-stream
+- Solution: Implemented auto-reconnection with connection validation
+
+**Message Overlap**
+- Problem: Multiple concurrent chatters causing response collision
+- Solution: FIFO queue system with duration-based synchronization
+
 ## Credits
 
    - Inspired by Vedal's Neuro-sama
    - Built with Claude API / OpenAI
    - Uses VTube Studio by DenchiSoft
-
-Template Repo: (https://github.com/VC-Mian/AI_VTuber) 
