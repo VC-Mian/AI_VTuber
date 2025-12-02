@@ -123,24 +123,24 @@ Twitch credentials
   
 5. Set Channel Name:
    - TWITCH_CHANNEL should be your streaming channel name (where viewers watch)
-     
-**AI API Key**
 
-For Claude (Recommended):
+6. AI API Key
 
-   - Go to: https://console.anthropic.com/
-   - Create an account → Add credits ($5 minimum)
-   - Generate API key → paste into ANTHROPIC_API_KEY
-   - Set AI_PROVIDER=claude
+   - For Claude (Recommended):
+   
+      - Go to: https://console.anthropic.com/
+      - Create an account → Add credits ($5 minimum)
+      - Generate API key → paste into ANTHROPIC_API_KEY
+      - Set AI_PROVIDER=claude
+   
+   - For OpenAI:
+   
+      - Go to: https://platform.openai.com/
+      - Create account → Add payment method
+      - Generate API key → paste into OPENAI_API_KEY
+      - Set AI_PROVIDER=openai
 
-For OpenAI:
-
-   - Go to: https://platform.openai.com/
-   - Create account → Add payment method
-   - Generate API key → paste into OPENAI_API_KEY
-   - Set AI_PROVIDER=openai
-
-6. (Optional) Set up VTube Studio
+7. (Optional) Set up VTube Studio
    - If you want character animation:
       - Download VTube Studio: https://denchisoft.com/
       - Open VTube Studio → Settings → General Settings
