@@ -33,6 +33,22 @@ and character animation to create an engaging streaming experience.
 - Git
 - Version control
 
+## What I have learnt
+   - Integrating multiple real-time APIs (Twitch, LLMs, VTube Studio)
+   - Asynchronous programming with Python asyncio
+   - WebSocket communication and error handling
+   - Message queue systems for sequential processing
+   - Multi-threaded TTS processing
+   - API rate limiting and reconnection logic
+
+##  Potential Improvements
+   - Upgrade TTS to ElevenLabs for better voice quality
+   - Create custom fine-tuned model for character
+   - Add sentiment analysis for dynamic expressions
+   - Implement long-term memory
+   - Rig Vtuber Model
+   - Ability to play games on it's own
+
 ## Running it
 **Prerequisites**
 
@@ -228,21 +244,6 @@ Customize trigger words in src/ai_brain.py:
    3. AI Processing: LLM generates personality-driven response
    4. Multi-Output: Response sent to chat, converted to speech, and animates character
    5. Synchronization: Waits for completion before processing next message
-
-## What I have learnt
-   - Integrating multiple real-time APIs (Twitch, LLMs, VTube Studio)
-   - Asynchronous programming with Python asyncio
-   - WebSocket communication and error handling
-   - Message queue systems for sequential processing
-   - Multi-threaded TTS processing
-   - API rate limiting and reconnection logic
-
-##  Potential Improvements
-   - Upgrade TTS to ElevenLabs for better voice quality
-   - Create custom fine-tuned model for character
-   - Add sentiment analysis for dynamic expressions
-   - Implement long-term memory
-   - Rig Vtuber Model
 
 ## Credits
 
