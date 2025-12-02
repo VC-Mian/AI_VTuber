@@ -103,11 +103,13 @@ If you do not have a twitich account create two accounts.
 
 OAuth Token: https://twitchtokengenerator.com/
    - Select: bot chat token
+
 Client ID/Secret: https://dev.twitch.tv/console/apps
     - Click Register new Application
     -	OAuth Redirect URLs: http://localhost:3000
     -	Category: Chat bot
     -	Generate a new secret
+    
 Bot ID: https://www.streamweasels.com/tools/convert-twitch-username-to-user-id/
 
 (OPTIONAL) Set up VTube Studio
