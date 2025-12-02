@@ -1,8 +1,20 @@
 # Project_MEI
 
-This is MEi an AI VTuber that interacts with Twitch viewers in real-time. 
+This is MEIBO an AI VTuber that interacts with Twitch viewers in real-time. 
 Inspired by Vedal who programed the AI Vtuber on Twutch, Neruo-sama, this project demonstrates the integration of large language models, real-time chat processing, 
 and character animation to create an engaging streaming experience. 
+
+## Personality
+   - Name: Meibo (nicknamed "Mei" or "Ei")
+   - Character: Plague Doctor
+   - Personality: Witty, sarcastic, playful, cool and composed
+   - Expertise: Medical knowledge with a dark sense of humor
+
+   - Trigger words to chat with Muei:
+      - meibo
+      - mei    
+      - ei
+   - Not case-sensitive 
 
 ## Features
 1. Real-time AI responses using Claude API
@@ -41,107 +53,6 @@ and character animation to create an engaging streaming experience.
 - OBS Studio (optional, for streaming)
 - Twitch account
 - Claude API key (or OpenAI API key)
-
-Clone the repository
-
-```bash
-   git clone https://github.com/yourusername/project-muei.git
-   cd project-muei
-```
-
-Create virtual environment
-
-```bash
-   python -m venv venv
-   # Windows
-   venv\Scripts\activate
-      
-   # Mac/Linux
-   source venv/bin/activate
-```
-
-Install dependencies
-```bash
-   pip install -r requirements.txt
-```
-
-Set up environment variables
-
-Create a .env file in the project root and add:
-```bash
-   ANTHROPIC_API_KEY=your_claude_api_key
-   # OR
-   OPENAI_API_KEY=your_openai_api_key
-
-   # AI Provider
-   AI_PROVIDER=Put_openai_or_claude
-
-   # Twitch Configuration
-   TWITCH_TOKEN=your_oauth_token
-   TWITCH_CLIENT_ID=your_client_id
-   TWITCH_CLIENT_SECRET=your_client_secret
-   TWITCH_BOT_ID=your_bot_id
-   TWITCH_CHANNEL=your_channel_name
-
-   # TTS Configuration
-   TTS_ENABLED=true
-   TTS_RATE=150
-   TTS_VOLUME=0.9
-   
-   # Bot Configuration
-   RESPONSE_COOLDOWN=3
-   MAX_MESSAGE_LENGTH=500
-```
-
-**Obtain credentials**
-
-Twitch credentials
-
-1. Create Two Twitch Accounts:
-   - Bot Account: This runs the code (e.g., mybot_ai)
-   - Streaming Channel: Where you broadcast (e.g., yourname)
-
-2. Get OAuth Token:
-   - Go to: https://twitchtokengenerator.com/
-   - Select "Bot Chat Token"
-   - Log in with your BOT account (not your streaming account)
-   - Copy the OAuth token → paste into TWITCH_TOKEN in .env
-
-3. Get Client ID & Client Secret:
-   - Go to: https://dev.twitch.tv/console/apps
-   - Fill in:
-      - Name: Your bot name
-      - OAuth Redirect URLs: http://localhost:3000
-      - Category: Chat Bot
-   - Click "Manage" → Copy Client ID → paste into .env
-   - Click "New Secret" → Copy Client Secret → paste into .env
-    
-4. Get Bot User ID:
-   - Go to: https://www.streamweasels.com/tools/convert-twitch-username-to-user-id/
-   - Enter your bot account username
-   - Copy the ID → paste into TWITCH_BOT_ID in .env
-  
-5. Set Channel Name:
-   - TWITCH_CHANNEL should be your streaming channel name (where viewers watch)
-
-6. AI API Key
-
-   - For Claude (Recommended):
-   
-      - Go to: https://console.anthropic.com/
-      - Create an account → Add credits ($5 minimum)
-      - Generate API key → paste into ANTHROPIC_API_KEY
-      - Set AI_PROVIDER=claude
-
-7. Set up VTube Studio
-   - If you want character animation:
-      - Download VTube Studio: https://denchisoft.com/
-      - Open VTube Studio → Settings → General Settings
-      - Enable "Start API"
-      - Note the port (default: 8001)
-
-**Personality**
-
 
 
 ## How it works
