@@ -14,7 +14,8 @@ and character animation to create an engaging streaming experience.
       - meibo
       - mei    
       - ei
-   - Not case-sensitive 
+        
+----- > Triggers are not case-sensitive 
 
 ## Features
 1. Real-time AI responses using Claude API
@@ -58,6 +59,7 @@ and character animation to create an engaging streaming experience.
 ## How it works
 
    Pipeline: 
+   
     ```bash
     
      Twitch Chat → Message Queue → Claude/OpenAI API → AI Response
@@ -82,12 +84,13 @@ and character animation to create an engaging streaming experience.
    - Multi-threaded TTS processing
    - API rate limiting and reconnection logic
 
-##  Potential Improvements
+##  Future Improvements & integrations
    - Upgrade TTS to ElevenLabs for better voice quality
    - Create custom fine-tuned model for character
    - Add sentiment analysis for dynamic expressions
    - Implement long-term memory
-   - Rig Vtuber Model
+   - Rig Custom Vtuber Model
+   - Minecraft game play
 
 ## Credits
 
