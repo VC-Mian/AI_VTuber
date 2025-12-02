@@ -188,24 +188,64 @@ Customize trigger words in src/ai_brain.py:
    ```
 
    3. You should see something like this example:
-      - Channel Name: mueibo
-      - Bot Name: muei_bot
+      - Channel Name: mychannel
+      - Bot Name: my_bot
       
    ```bash
       Configuration validated
       AI Brain initialized with provider: claude
       TTS Engine initialized
-      Muei Bot initialized! Joining channel: mueibo
+      my_bot Bot initialized! Joining channel: mychannel
       ✓ Bot initialized
       
       Starting bot... Press Ctrl+C to stop
       ==================================================
-      ✓ Bot successfully joined channel: mueibo
-      [JOIN] muei_bot joined mueibo
-      Muei is online! Connected as muei_bot
-      Joined channel: mueibo
-      Waiting for messages... (Type a message in chat, mentioning the bot by its triggers(names))
+      ✓ Bot successfully joined channel: mychannel
+      [JOIN] my_bot joined mychannel
+      my_bot is online! Connected as my_bot
+      Joined channel: mychannel
+      Waiting for messages... (Type a message in chat, make sure to include one of the trigger names)
    ```
 
    4. Test it:
-      - Go to your Twitch channel → type in chat, mentioning the bots name
+      - Go to your Twitch channel → type in chat, mentioning the bots name (Ex. Hi robot)
+
+## How it works
+
+   Pipeline: 
+    ```bash
+    
+     Twitch Chat → Message Queue → Claude/OpenAI API → AI Response
+                                                         ↓
+                                     ┌──────────────────┼──────────────────┐
+                                     ↓                  ↓                  ↓
+                               Twitch Chat          TTS Engine      VTube Studio
+                              (text reply)        (voice output)    (lip-sync)
+     
+     ```
+   1. Message Reception: Bot monitors your Twitch chat for trigger words
+   2. Queueing: Messages processed one at a time to prevent overlap
+   3. AI Processing: LLM generates personality-driven response
+   4. Multi-Output: Response sent to chat, converted to speech, and animates character
+   5. Synchronization: Waits for completion before processing next message
+
+## What I have learnt
+   - Integrating multiple real-time APIs (Twitch, LLMs, VTube Studio)
+   - Asynchronous programming with Python asyncio
+   - WebSocket communication and error handling
+   - Message queue systems for sequential processing
+   - Multi-threaded TTS processing
+   - API rate limiting and reconnection logic
+
+##  Potential Improvements
+   - Upgrade TTS to ElevenLabs for better voice quality
+   - Create custom fine-tuned model for character
+   - Add sentiment analysis for dynamic expressions
+   - Implement long-term memory
+   - Rig Vtuber Model
+
+## Credits
+
+   - Inspired by Vedal's Neuro-sama
+   - Built with Claude API / OpenAI
+   - Uses VTube Studio by DenchiSoft
