@@ -1,6 +1,6 @@
-# Project_MEI_AI_VTuber
+# AI_VTuber
 
-Project MEI is an AI-powered VTuber that interacts with Twitch viewers in real-time. 
+This is an AI-powered VTuber that interacts with Twitch viewers in real-time. 
 Inspired by Vedal who programed the AI Vtuber on Twutch, Neruo-sama, this project demonstrates the integration of large language models, real-time chat processing, 
 and character animation to create an engaging streaming experience. 
 
@@ -52,12 +52,12 @@ Clone the repository
 Create virtual environment
 
 ```bash
-python -m venv venv
-# Windows
-venv\Scripts\activate
-   
-# Mac/Linux
-source venv/bin/activate
+   python -m venv venv
+   # Windows
+   venv\Scripts\activate
+      
+   # Mac/Linux
+   source venv/bin/activate
 ```
 
 Install dependencies
@@ -67,7 +67,7 @@ Install dependencies
 
 Set up environment variables
 
-Create a .env, copy & paste this into the file
+Create a .env file in the project root and add:
 ```bash
    ANTHROPIC_API_KEY=your_claude_api_key
    # OR
@@ -97,40 +97,115 @@ Create a .env, copy & paste this into the file
 
 Twitch credentials
 
-If you do not have a twitich account create two accounts.
-1st Account will be the bots account
-2nd will be to braodcast from
+1. Create Two Twitch Accounts:
+   - Bot Account: This runs the code (e.g., mybot_ai)
+   - Streaming Channel: Where you broadcast (e.g., yourname)
 
-OAuth Token: https://twitchtokengenerator.com/
-   - Select: bot chat token
+2. Get OAuth Token:
+   - Go to: https://twitchtokengenerator.com/
+   - Select "Bot Chat Token"
+   - Log in with your BOT account (not your streaming account)
+   - Copy the OAuth token → paste into TWITCH_TOKEN in .env
 
-Client ID/Secret: https://dev.twitch.tv/console/apps
-   - Click Register new Application
-   - OAuth Redirect URLs: http://localhost:3000
-   - Category: Chat bot
-   - Generate a new secret
+3. Get Client ID & Client Secret:
+   - Go to: https://dev.twitch.tv/console/apps
+   - Fill in:
+      - Name: Your bot name
+      - OAuth Redirect URLs: http://localhost:3000
+      - Category: Chat Bot
+   - Click "Manage" → Copy Client ID → paste into .env
+   - Click "New Secret" → Copy Client Secret → paste into .env
     
-Bot ID: https://www.streamweasels.com/tools/convert-twitch-username-to-user-id/
-   - Enter the Bot's name to convert, copy the ID generated. 
+4. Get Bot User ID:
+   - Go to: https://www.streamweasels.com/tools/convert-twitch-username-to-user-id/
+   - Enter your bot account username
+   - Copy the ID → paste into TWITCH_BOT_ID in .env
+  
+5. Set Channel Name:
+   - TWITCH_CHANNEL should be your streaming channel name (where viewers watch)
+     
+**AI API Key**
 
-(OPTIONAL) Set up VTube Studio
+For Claude (Recommended):
 
-Open VTube Studio
-- Go to Settings → General Settings
-- Enable "Start API"
+   - Go to: https://console.anthropic.com/
+   - Create an account → Add credits ($5 minimum)
+   - Generate API key → paste into ANTHROPIC_API_KEY
+   - Set AI_PROVIDER=claude
 
-Note the port (default: 8001)
+For OpenAI:
+
+   - Go to: https://platform.openai.com/
+   - Create account → Add payment method
+   - Generate API key → paste into OPENAI_API_KEY
+   - Set AI_PROVIDER=openai
+
+6. (Optional) Set up VTube Studio
+   - If you want character animation:
+      - Download VTube Studio: https://denchisoft.com/
+      - Open VTube Studio → Settings → General Settings
+      - Enable "Start API"
+      - Note the port (default: 8001)
+
+**Personality**
+
+Open src/config.py and find the PERSONALITY_PROMPT section. Customize it to match your character!
+
+```bash
+   PERSONALITY_PROMPT = """You are [Your Character Name], a [character description].
+   
+   Personality traits:
+   - [Trait 1]
+   - [Trait 2]
+   - [Trait 3]
+   
+   Background:
+   - [Your character's backstory]
+   
+   Response guidelines:
+   - Keep responses concise (1-3 sentences typically)
+   - [Add your specific guidelines]
+   """
+```
+Customize trigger words in src/ai_brain.py:
+```bash
+   triggers = [
+       'yourbot',      # Change to your bot name
+       'nickname1',    # Add nicknames
+       'nickname2',
+       '!yourbot'
+   ]
+```
 
 **Running the Project**
 
-(OPTIONAL) Start VTube Studio (must be running first) 
+   1. (Optional) Launch VTube Studio first if using character animation
 
- Run the bot
+   2. Run it
 
-```bash
-python main.py
-```
+   ```bash
+   python main.py
+   ```
 
-Test in Twitch chat
+   3. You should see something like this example:
+      - Channel Name: mueibo
+      - Bot Name: muei_bot
+      
+   ```bash
+      Configuration validated
+      AI Brain initialized with provider: claude
+      TTS Engine initialized
+      Muei Bot initialized! Joining channel: mueibo
+      ✓ Bot initialized
+      
+      Starting bot... Press Ctrl+C to stop
+      ==================================================
+      ✓ Bot successfully joined channel: mueibo
+      [JOIN] muei_bot joined mueibo
+      Muei is online! Connected as muei_bot
+      Joined channel: mueibo
+      Waiting for messages... (Type a message in chat, mentioning the bot by its triggers(names))
+   ```
 
-Go to the Twitch channel "muiebo" and type "Hi mei" 
+   4. Test it:
+      - Go to your Twitch channel → type in chat, mentioning the bots name
