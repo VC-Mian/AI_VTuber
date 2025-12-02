@@ -97,3 +97,5 @@ and character animation to create an engaging streaming experience.
    - Inspired by Vedal's Neuro-sama
    - Built with Claude API / OpenAI
    - Uses VTube Studio by DenchiSoft
+
+Template Repo: (https://github.com/VC-Mian/AI_VTuber) 
