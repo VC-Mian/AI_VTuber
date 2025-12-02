@@ -105,20 +105,20 @@ OAuth Token: https://twitchtokengenerator.com/
    - Select: bot chat token
 
 Client ID/Secret: https://dev.twitch.tv/console/apps
-    - Click Register new Application
-    -	OAuth Redirect URLs: http://localhost:3000
-    -	Category: Chat bot
-    -	Generate a new secret
+   - Click Register new Application
+   - OAuth Redirect URLs: http://localhost:3000
+   - Category: Chat bot
+   - Generate a new secret
     
 Bot ID: https://www.streamweasels.com/tools/convert-twitch-username-to-user-id/
 
 (OPTIONAL) Set up VTube Studio
 
 Open VTube Studio
-Go to Settings → General Settings
-Enable "Start API"
-Note the port (default: 8001)
+- Go to Settings → General Settings
+- Enable "Start API"
 
+Note the port (default: 8001)
 
 **Running the Project**
 
