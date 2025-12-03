@@ -35,22 +35,6 @@ and character animation to create an engaging streaming experience. Feel free to
 - Git
 - Version control
 
-## What I have learnt
-   - Integrating multiple real-time APIs (Twitch, LLMs, VTube Studio)
-   - Asynchronous programming with Python asyncio
-   - WebSocket communication and error handling
-   - Message queue systems for sequential processing
-   - Multi-threaded TTS processing
-   - API rate limiting and reconnection logic
-
-##  Potential Improvements
-   - Upgrade TTS to ElevenLabs for better voice quality
-   - Create custom fine-tuned model for character
-   - Add sentiment analysis for dynamic expressions
-   - Implement long-term memory
-   - Rig Vtuber Model
-   - Ability to play games on it's own
-
 ## Running it
 **Prerequisites**
 
@@ -164,6 +148,8 @@ Twitch credentials
       - Open VTube Studio → Settings → General Settings
       - Enable "Start API"
       - Note the port (default: 8001)
+      - Scroll down to "Twitch Settings" → connect to the bots twitch account
+      - You should see a popup saying to allow your project to connect → click "allow"
 
 **Personality**
 
