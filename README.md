@@ -1,8 +1,8 @@
 # AI_VTuber
 
-This is an AI-powered VTuber that interacts with Twitch viewers in real-time. 
+This is a Basic Template to a AI-powered VTuber that interacts with Twitch viewers in real-time. 
 Inspired by Vedal who programed the AI Vtuber on Twitch, Neruo-sama, this project demonstrates the integration of large language models, real-time chat processing, 
-and character animation to create an engaging streaming experience. Feel free to clone & make your own. 
+and character animation to create an engaging streaming experience. Feel free to clone & Customize it. A lot can be improved and added. 
 
 ## Demo [SOON]:
 
