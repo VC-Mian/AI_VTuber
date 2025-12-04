@@ -1,3 +1,13 @@
+"""
+Chat Reader Module - Handles Twitch integration and message processing
+
+This module manages:
+- Connection to Twitch IRC
+- Message queue for sequential processing
+- Commands for moderators
+- Integration with AI brain, TTS, and VTuber controller
+"""
+
 from twitchio.ext import commands
 import asyncio
 from queue import Queue
@@ -6,9 +16,8 @@ from src.ai_brain import AIBrain
 from src.tts_engine import TTSEngine
 from src.vtuber_controller import VTuberController
 
-class MeiBot(commands.Bot):
-
-    """Twitch bot that integrates AI and TTS"""
+class Bot(commands.Bot):
+    """Twitch bot that integrates AI, TTS, and VTuber animation"""
     
     def __init__(self):
         # Initialize the bot with Twitch credentials
@@ -26,7 +35,7 @@ class MeiBot(commands.Bot):
         self.ai_brain = AIBrain()
         self.tts_engine = TTSEngine()
         
-        # Initialize VTuber controller
+        # Initialize VTuber controller (optional - will gracefully fail if not connected)
         self.vtuber = VTuberController()
         
         # Message queue for handling multiple requests
@@ -37,23 +46,21 @@ class MeiBot(commands.Bot):
         self.last_response_time = 0
         self.response_cooldown = Config.RESPONSE_COOLDOWN
         
-        print(f"Mei Bot initialized! Joining channel: {Config.TWITCH_CHANNEL}")
+        print(f"Bot initialized! Joining channel: {Config.TWITCH_CHANNEL}")
     
     async def event_ready(self):
-
-        """Called when the bot is ready"""
-
-        print(f'Mei is online! Connected as {Config.TWITCH_BOT_NICK}')
-        print(f'Joined channel: {Config.TWITCH_CHANNEL}')
-        print(f'Waiting for messages... (Type a message in chat, mentioning the bot by its names, else you will be ignored)')
+        """Called when the bot is ready and connected to Twitch"""
+        print(f'✓ Bot is online! Connected as {Config.TWITCH_BOT_NICK}')
+        print(f'✓ Joined channel: {Config.TWITCH_CHANNEL}')
+        print(f'Waiting for messages... (Bot will respond when triggered)')
             
-        # Connect to VTube Studio
-        print("Connecting to VTube Studio...")
+        # Connect to VTube Studio (optional - bot works without it)
+        print("\nAttempting to connect to VTube Studio...")
         await self.vtuber.connect()
     
     async def event_channel_joined(self, channel):
         """Called when bot successfully joins a channel"""
-        print(f'✓ Bot successfully joined channel: {channel.name}')
+        print(f'✓ Successfully joined channel: {channel.name}')
     
     async def event_join(self, channel, user):
         """Called when someone joins the channel"""
@@ -108,6 +115,7 @@ class MeiBot(commands.Bot):
                     message=message.content
                 )
                 
+                # Split response if too long for Twitch (500 char limit)
                 if len(response) > 450:  # Leave buffer for safety
                     # Split into sentences
                     sentences = response.replace('!', '.').replace('?', '.').split('.')
@@ -142,7 +150,7 @@ class MeiBot(commands.Bot):
                 print(f"[TTS] Speaking response...")
                 self.tts_engine.speak(response)
 
-                # Animate VTuber model while speaking
+                # Animate VTuber model while speaking (if connected)
                 print(f"[VTUBER] Animating mouth...")
                 await self.vtuber.simulate_talking(response)
  
@@ -150,9 +158,8 @@ class MeiBot(commands.Bot):
                 await asyncio.sleep(1)
                 
                 # Wait for TTS to finish (estimate based on text length)
-                # Roughly 150 words per minute = 2.5 words per second
                 word_count = len(response.split())
-                tts_duration = (word_count / 2.5) + 1  # +1 second buffer
+                tts_duration = (word_count / 2.5) + 1  # ~2.5 words per second + buffer
                 await asyncio.sleep(tts_duration)
                 
                 # Cooldown between responses
@@ -166,11 +173,20 @@ class MeiBot(commands.Bot):
         self.is_processing = False
         print(f"[QUEUE] Queue empty, waiting for new messages")
     
-    @commands.command(name='mei')
-    async def mei_command(self, ctx):
-        """Direct command to talk to Mei"""
-        # Get everything after !mei
-        message_content = ctx.message.content.replace('!mei', '', 1).strip()
+    # =========================================================================
+    # BOT COMMANDS - Customize these for your bot
+    # =========================================================================
+    
+    @commands.command(name='bot')
+    async def bot_command(self, ctx):
+        """
+        Direct command to talk to your bot
+        Usage: !bot [message]
+        
+        CUSTOMIZE: Change 'bot' to your bot's name
+        """
+        # Get everything after the command
+        message_content = ctx.message.content.replace('!bot', '', 1).strip()
         
         if not message_content:
             await ctx.send("You called? What do you need?")
@@ -181,7 +197,7 @@ class MeiBot(commands.Bot):
     
     @commands.command(name='clear')
     async def clear_history(self, ctx):
-        """Clear conversation history"""
+        """Clear conversation history (mods only)"""
         # Only allow broadcaster or mods
         if ctx.author.is_mod or ctx.author.is_broadcaster:
             self.ai_brain.clear_history()
@@ -191,7 +207,7 @@ class MeiBot(commands.Bot):
     
     @commands.command(name='tts')
     async def toggle_tts(self, ctx):
-        """Toggle TTS on/off"""
+        """Toggle TTS on/off (mods only)"""
         if ctx.author.is_mod or ctx.author.is_broadcaster:
             status = self.tts_engine.toggle()
             state = "enabled" if status else "disabled"
@@ -201,11 +217,15 @@ class MeiBot(commands.Bot):
     
     @commands.command(name='help')
     async def help_command(self, ctx):
-        """Show available commands"""
+        """
+        Show available commands
+        
+        CUSTOMIZE: Update this text to match your bot's name and triggers
+        """
         help_text = (
-            "Commands: !meibo [message] - talk to me | "
+            "Commands: !bot [message] - talk to me | "
             "!clear - clear memory (mods) | "
             "!tts - toggle TTS (mods) | "
-            "Just mention 'mei' or 'meibo' in chat to talk!"
+            "Just mention my name in chat to talk!"
         )
         await ctx.send(help_text)

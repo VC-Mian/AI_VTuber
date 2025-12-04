@@ -1,14 +1,26 @@
+"""
+VTuber Controller Module - Handles VTube Studio API integration
+
+This module controls:
+- Connection to VTube Studio via WebSocket
+- Lip-sync animation during speech
+- Auto-reconnection if connection drops
+- Future: Facial expressions and emotions
+
+OPTIONAL: Bot works without VTube Studio. If not connected, it will skip animation.
+"""
+
 import asyncio
 import pyvts
 
 class VTuberController:
-    """Controls VTube Studio model for lip-sync and expressions(later to be implemented)"""
+    """Controls VTube Studio model for lip-sync and expressions"""
     
     def __init__(self):
         self.vts = None
         self.connected = False
-        self.plugin_name = "Project Mei"
-        self.plugin_developer = "MeiDev"
+        self.plugin_name = "AI VTuber Bot"  # CUSTOMIZE: Your bot's name
+        self.plugin_developer = "YourName"  # CUSTOMIZE: Your name
         self.reconnecting = False
         
     async def connect(self):
@@ -20,7 +32,7 @@ class VTuberController:
                     "developer": self.plugin_developer,
                     "authentication_token_path": "token.txt"
                 },
-                port=8001
+                port=8001  # Default VTube Studio API port
             )
             
             await self.vts.connect()
@@ -33,8 +45,9 @@ class VTuberController:
             return True
             
         except Exception as e:
-            print(f"Failed to connect to VTube Studio: {e}")
-            print("Make sure VTube Studio has API enabled!")
+            print(f"⚠ Failed to connect to VTube Studio: {e}")
+            print("  Bot will continue without VTube Studio animation.")
+            print("  Make sure VTube Studio is running with API enabled!")
             self.connected = False
             return False
     
@@ -55,9 +68,13 @@ class VTuberController:
         await asyncio.sleep(1)
         await self.connect()
     
-    """Control functions"""
     async def trigger_mouth_open(self, duration=0.5):
-        """Open mouth for lip-sync effect"""
+        """
+        Open mouth for lip-sync effect
+        
+        Args:
+            duration: How long to keep mouth open (seconds)
+        """
         if not self.connected:
             return
         
@@ -85,18 +102,25 @@ class VTuberController:
             self.connected = False
             await self.reconnect()
 
-    """Simulate talking animation based on text length"""
     async def simulate_talking(self, text):
+        """
+        Simulate talking animation based on text length
+        
+        Args:
+            text: The text being spoken (used to calculate duration)
+        """
+        # If not connected, try to reconnect
         if not self.connected and not self.reconnecting:
             await self.reconnect()
         
+        # If still not connected, skip animation
         if not self.connected:
             print("[VTUBER] Not connected, skipping animation")
             return
         
-        # Estimate speaking duration
+        # Estimate speaking duration based on word count
         word_count = len(text.split())
-        duration = word_count / 2.5
+        duration = word_count / 2.5  # ~2.5 words per second
         
         # Animate mouth opening/closing
         try:
@@ -114,8 +138,8 @@ class VTuberController:
             self.connected = False
             await self.reconnect()
     
-    """Disconnect from VTube Studio"""
     async def disconnect(self):
+        """Disconnect from VTube Studio"""
         if self.vts:
             try:
                 await self.vts.close()

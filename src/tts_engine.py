@@ -1,10 +1,17 @@
-'''
-Allows meibo to speak in chat and in a separate thread. Picks random chatters comment to repsoned too. 
+"""
+TTS Engine Module - Handles text-to-speech conversion
 
-To be added:
-Filters- curses, offensive language, etc.
+This module:
+- Converts AI responses to speech
+- Runs in separate thread to avoid blocking
+- Automatically selects female voice if available
+- Allows runtime toggling of TTS
 
-'''
+Future improvements:
+- Upgrade to ElevenLabs for better voice quality
+- Add multilingual support
+- Implement custom voice profiles
+"""
 
 import pyttsx3
 import threading
@@ -25,7 +32,7 @@ class TTSEngine:
                 temp_engine = pyttsx3.init()
                 voices = temp_engine.getProperty('voices')
                 
-                # Try to find a female voice
+                # Try to find a female voice (customize this if needed)
                 for voice in voices:
                     if 'female' in voice.name.lower() or 'zira' in voice.name.lower():
                         self.voice_id = voice.id
@@ -34,9 +41,10 @@ class TTSEngine:
                 temp_engine.stop()
                 del temp_engine
                 
-                print("TTS Engine initialized")
+                print("✓ TTS Engine initialized")
             except Exception as e:
-                print(f"Failed to initialize TTS: {e}")
+                print(f"⚠ Failed to initialize TTS: {e}")
+                print("  Bot will continue without TTS.")
                 self.enabled = False
         else:
             print("TTS is disabled")
@@ -52,7 +60,7 @@ class TTSEngine:
             return
         
         try:
-            # Run TTS in a separate thread so it doesn't block
+            # Run TTS in a separate thread so it doesn't block the bot
             thread = threading.Thread(target=self._speak_thread, args=(text,))
             thread.daemon = True
             thread.start()
@@ -60,9 +68,14 @@ class TTSEngine:
             print(f"TTS Error: {e}")
     
     def _speak_thread(self, text):
-        """Internal method to handle TTS in separate thread"""
+        """
+        Internal method to handle TTS in separate thread
+        
+        Creates a new engine instance for each speech operation to avoid
+        threading conflicts with pyttsx3.
+        """
         try:
-            # Create a NEW engine instance for each speech
+            # Create a NEW engine instance for each speech operation
             engine = pyttsx3.init()
             engine.setProperty('rate', self.rate)
             engine.setProperty('volume', self.volume)
@@ -78,15 +91,30 @@ class TTSEngine:
             print(f"TTS Thread Error: {e}")
     
     def set_rate(self, rate):
-        """Set speech rate"""
+        """
+        Set speech rate
+        
+        Args:
+            rate: Words per minute (typical: 150-200)
+        """
         self.rate = rate
     
     def set_volume(self, volume):
-        """Set speech volume (0.0 to 1.0)"""
+        """
+        Set speech volume
+        
+        Args:
+            volume: Volume level (0.0 to 1.0)
+        """
         self.volume = volume
     
     def toggle(self):
-        """Toggle TTS on/off"""
+        """
+        Toggle TTS on/off
+        
+        Returns:
+            Boolean indicating new state (True = enabled)
+        """
         self.enabled = not self.enabled
         status = "enabled" if self.enabled else "disabled"
         print(f"TTS {status}")

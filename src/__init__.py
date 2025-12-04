@@ -33,4 +33,4 @@ def __init__(self):
     self.last_response_time = 0
     self.response_cooldown = Config.RESPONSE_COOLDOWN
     
-    print(f"Muei Bot initialized! Joining channel: {Config.TWITCH_CHANNEL}")
+    print(f" {Config.TWITCH_BOT_nick} bot initialized! Joining channel: {Config.TWITCH_CHANNEL}")

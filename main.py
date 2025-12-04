@@ -6,7 +6,7 @@ Entry point for the application
 
 import sys
 from src.config import Config
-from src.chat_reader import MeiBot
+from src.chat_reader import Bot
 
 def main():
     """Main entry point"""
@@ -20,7 +20,7 @@ def main():
         print("✓ Configuration validated")
         
         # Create and run the bot
-        bot = MeiBot()
+        bot = Bot()
         print("✓ Bot initialized")
         print("\nStarting bot... Press Ctrl+C to stop")
         print("=" * 50)
@@ -30,7 +30,7 @@ def main():
     except ValueError as e:
         print(f"\n❌ Configuration Error: {e}")
         print("\nPlease check your .env file and ensure all required variables are set.")
-        print("Refer to .env.example for the required configuration.")
+        print("Refer to .env for the required configuration.")
         sys.exit(1)
     
     except KeyboardInterrupt:
