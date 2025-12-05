@@ -1,8 +1,8 @@
 # AI_VTuber
 
-This is a Basic Template to a AI-powered VTuber that interacts with Twitch viewers in real-time. 
+This is a basic Template to an AI-powered VTuber that interacts with Twitch viewers in real-time. 
 Inspired by Vedal who programed the AI Vtuber on Twitch, Neruo-sama, this project demonstrates the integration of large language models, real-time chat processing, 
-and character animation to create an engaging streaming experience. Feel free to clone & Customize it. A lot can be improved and added. 
+and character animation to create an engaging streaming experience. Feel free to Clone, Customize, & improve the model.
 
 ## Demo [SOON]:
 
@@ -140,6 +140,7 @@ Twitch credentials
    
       - Go to: https://platform.openai.com/
       - Create account → Add payment method
+      - Add Credits
       - Generate API key → paste into OPENAI_API_KEY
       - Set AI_PROVIDER=openai
 
@@ -173,6 +174,7 @@ Open src/config.py and find the PERSONALITY_PROMPT section. Customize it to matc
    """
 ```
 Customize trigger words in src/ai_brain.py:
+
 ```bash
    triggers = [
        'yourbot',      # Change to your bot name
